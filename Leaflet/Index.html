@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My first map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+    <script src = "./St.John leaflet/DolphineMart.geojson"></script>
+    <script src = "./St.John leaflet/St.John.geojson"></script>
+    <script src = "St.John leaflet/Starfish.geojson"></script>
+
+</head>
+<body>
+    <div id="mapid"></div>
+    <style>
+        #mapid{ width: 900px; height: 500px;}
+    </style>
+
+    <script>
+        var map = L.map('mapid').setView([18.3291,-64.7804], 14);
+        L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {}).addTo(map)
+        //L.marker([18.32758,-64.79104]).addTo(map)
+            //.bindPopup("Starfish Market")
+            //.openPopup();
+        
+        
+        
+            var SIcon = L.icon({
+            iconUrl: 'https://i.pinimg.com/originals/fc/67/80/fc678056a4e10006b282759336711c0f.png',
+            iconSize: [50, 50],
+            popupAnchor: [0,0]
+        });
+
+        var customPopup = "Starfish Market! St. John's largest grocery supermarket!<br/><img src='https://lh3.googleusercontent.com/proxy/AOftOuzWDaytC_Boca-PyVrvzi-MXSNhPXU6NDdmEHxtfKF9tErbedqE-dlz6TJSndXZWoN6ee8QzfNVlrA4Pvh_et3Uk2WtKvk8uKsOK12KF63r' width='200px'/>";
+        
+        L.geoJSON(starfish, { // a
+        pointToLayer: function (feature, latlng) { // b
+        return L.marker(latlng, {icon: SIcon});}}) // c
+        .bindPopup(customPopup) // d
+        .addTo(map); //
+        
+           
+            var DIcon = L.icon({
+            iconUrl: 'https://static.thenounproject.com/png/1695234-200.png',
+            iconSize: [50, 50],
+            popupAnchor: [0,0]
+        });
+
+        var customPopup = "Dolphin Mart! A great place to get all of your grociery needs!<br/><img src='https://www.gannett-cdn.com/-mm-/1b82a2017e301d514bc908e16bf7dc60bf046882/c=0-185-3885-2380/local/-/media/2015/11/04/WIGroup/Wausau/635822602501463402-ThinkstockPhotos-177759478.jpg?width=660&height=373&fit=crop&format=pjpg&auto=webp' width='200px'/>";
+        
+        L.geoJSON(DolphinMart, { // a
+        pointToLayer: function (feature, latlng) { // b
+        return L.marker(latlng, {icon: DIcon});}}) // c
+        .bindPopup(customPopup) // d
+        .addTo(map); //
+
+        L.marker([18.32524, -64.78547]).addTo(map)
+            .bindPopup("St. John Market")
+            .openPopup();
+
+      //var JIcon = L.icon({
+        //iconUrl: 'https://static.thenounproject.com/png/1695234-200.png',
+        //iconSize: [50, 50],
+        //popupAnchor: [0,0]
+        //});
+
+        //var customPopup = "St. John Gourmet Market! The perfect place for a quick grocery stop!<br/><img src='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.facebook.com%2FStJohn-Market-Deli-223204808053161%2F&psig=AOvVaw30flx3FS76-PbiCxK_KCX8&ust=1599871814441000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPDosYTz3-sCFQAAAAAdAAAAABAK' width='300px'/>";
+        
+        //L.geoJSON(St.John, { // a
+        //pointToLayer: function (feature, latlng) { // b
+        //return L.marker(latlng, {icon: JIcon});}}) // c
+        //.bindPopup(customPopup) // d
+        //.addTo(map); //
+
+
+            
+    </script>
+</body>
+</html>
